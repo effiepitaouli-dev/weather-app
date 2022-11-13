@@ -1,0 +1,1 @@
+// To display for informing user for the cookie

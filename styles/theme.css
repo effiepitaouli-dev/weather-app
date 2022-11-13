@@ -1,0 +1,8 @@
+.theme-dark{
+    --bgColor: rgb(10, 10, 73);
+    --textColor: rgb(237, 255, 254);
+}
+
+:root:has(.theme-dark) {
+    --bgColor: rgb(10, 10, 73);
+}
