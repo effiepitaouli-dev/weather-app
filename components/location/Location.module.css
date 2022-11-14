@@ -1,0 +1,5 @@
+.location {
+    margin: var(--gap-l) 0;
+    grid-template-columns: auto auto;
+    gap: var(--gap);
+}

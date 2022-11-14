@@ -5,7 +5,7 @@ import styles from './Autocomplete.module.css';
 
 export interface AutocompleteProps {
     placeholder?: string;
-    handlePlace(): void;
+    handlePlaceChange(): void;
 }
 
 export interface Place {
@@ -18,7 +18,7 @@ export interface Place {
 export function Autocomplete(props: AutocompleteProps) {
     let {
         placeholder: placeholder,
-        handlePlace: handlePlace,
+        handlePlaceChange: handlePlaceChange,
         ...otherProps
     } = props;
 
@@ -28,7 +28,7 @@ export function Autocomplete(props: AutocompleteProps) {
 
     function getPlace(place: Place) {
         const coords = `${place.geometry.location.lat()},${place.geometry.location.lng()}`;
-        props.handlePlace(coords, place.formatted_address);
+        props.handlePlaceChange(coords, place.formatted_address);
     }
 
     return (
