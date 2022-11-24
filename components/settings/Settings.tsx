@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-//import styles from './Settings.module.css';
+import React, { KeyboardEventHandler } from "react";
+import styles from './Settings.module.css';
+import clsx from "clsx";
 
 export interface SettingsProps {
     theme(): void;
@@ -13,9 +14,26 @@ export function Settings(props: SettingsProps) {
         ...otherProps
     } = props;
 
+    const classes = clsx('u-flex', styles.settingsWrapper);
+
+    const keypressHandler: KeyboardEventHandler = function (e: KeyboardEvent) {
+        if (e.key == "Enter") {
+            props.theme();
+        }
+    }
+
     return (
-        <div>
-            <input id="dark-theme" type="checkbox" name="dark-theme" aria-label="Set dark theme" onClick={props.theme} defaultChecked={props.dark == 'dark'} />
+        <div className={classes}>
+            <input
+                id="dark-theme"
+                className={styles.themeCheckbox}
+                type="checkbox"
+                name="dark-theme"
+                aria-label="Set dark theme"
+                onClick={props.theme}
+                onKeyDown={keypressHandler}
+                defaultChecked={props.dark == 'dark'}
+            />
         </div>
     )
 

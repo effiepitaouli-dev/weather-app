@@ -43,3 +43,13 @@ Use cookie for storing geolocation request status
 Add button for checking weather for previous dates
 
 Check weather api documentation and parameters for limiting results
+
+
+TO DO:
+
+1. Hover Effects
+2. Test for Accessibility
+3. Add settings bar on the left 
+4. Fix styles for google autocomplete
+5. Use LocalStorage for adding additional configuration?
+6. Mood Animation effect for current day

@@ -6,6 +6,7 @@ import { Location } from '../components/location';
 import { Settings } from '../components/settings';
 import { useState, useEffect, use } from 'react';
 import Cookies from 'universal-cookie';
+import { Html } from 'next/document';
 
 export default function Home() {
   const cookies = new Cookies();

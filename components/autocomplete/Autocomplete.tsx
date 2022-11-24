@@ -5,7 +5,7 @@ import styles from './Autocomplete.module.css';
 //import clsx from "clsx";
 
 interface HandlePlaceChange {
-    (coords: string, place: string) : void;
+    (coords: string, place: string): void;
 }
 
 export interface AutocompleteProps {
@@ -47,6 +47,7 @@ export function Autocomplete(props: AutocompleteProps) {
         <AutoComplete
             apiKey="AIzaSyBA10k4Go8Xy1OUV2fHVkmEIBwmCQ5FyYs"
             onPlaceSelected={getPlace}
+            language="en"
             options={options}>{/* To use defaultValue with the stored value from the cookie */}</AutoComplete>
     )
 }

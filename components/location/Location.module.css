@@ -1,5 +1,15 @@
 .location {
-    margin: var(--gap-l) 0;
+    margin: var(--gap-l) 0 var(--gap-l) auto;
     grid-template-columns: auto auto;
-    gap: var(--gap);
+    max-width: 720px;
+    /* gap: var(--gap); */
+}
+
+.location input {
+    color: var(--bgColor);
+    border-radius: var(--default-radius) 0 0 var(--default-radius);
+}
+
+.location button {
+    border-radius: 0 var(--default-radius) var(--default-radius) 0;
 }

@@ -2,10 +2,12 @@
     /* Colors to be moved to theme ? */
     --accentColor: rgb(19, 219, 237);
     --accent: 19, 219, 237;
-    --bgColor: rgb(237, 255, 254);
-    --bg: 237, 255, 254;
+    --bgColor: rgb(27, 233, 199);
+    --bg: 27, 233, 199;
     --textColor: rgb(10, 10, 73);
     --moodColor: rgb(45, 2, 2);
+    --white: rgb(255, 255, 255);
+    --negative: rgb(10, 10, 73);
 
     /* Spacing */
     --gap-s: 8px;
@@ -13,6 +15,6 @@
     --gap-l: calc(var(--gap-s) * 3);
     --gap-xl: calc(var(--gap) * 2);
 
-    --default-radius: 5px;
+    --default-radius: 6px;
     --default-transition: 350ms ease-in-out;
 }
