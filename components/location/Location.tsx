@@ -6,7 +6,7 @@ import styles from './Location.module.css';
 
 export interface LocationProps {
     classes?: string;
-    handlePlace(): void;
+    handlePlace(coors: string, place: string): void;
 }
 
 export function Location(props: LocationProps) {

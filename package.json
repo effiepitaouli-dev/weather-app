@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress open",
+    "cypress:headless": "cypress run"
   },
   "dependencies": {
     "@types/node": "18.11.9",
@@ -22,6 +24,7 @@
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
-    "clsx": "^1.2.1"
+    "clsx": "^1.2.1",
+    "cypress": "^11.2.0"
   }
 }

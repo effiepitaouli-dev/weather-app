@@ -1,16 +1,28 @@
+import { StringifyOptions } from "querystring";
 import React from "react";
 import AutoComplete from "react-google-autocomplete";
 import styles from './Autocomplete.module.css';
 //import clsx from "clsx";
 
+interface HandlePlaceChange {
+    (coords: string, place: string) : void;
+}
+
 export interface AutocompleteProps {
     placeholder?: string;
-    handlePlaceChange(): void;
+    handlePlaceChange: HandlePlaceChange;
+}
+
+export interface Location {
+    location: {
+        lat(): void,
+        lng(): void
+    }
 }
 
 export interface Place {
     formatted_address: string;
-    geometry: {};
+    geometry: Location;
     name: string;
     html_attributions: [];
 }
