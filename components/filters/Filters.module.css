@@ -1,0 +1,11 @@
+.filters {
+    position: absolute;
+    padding: var(--gap-l) var(--gap) var(--gap-l) var(--gap-s);
+    background: var(--white);
+    border-radius: 0 var(--default-radius) var(--default-radius) 0;
+    color: var(--darkBlue);
+}
+
+.filters--left {
+    left: 0;
+}

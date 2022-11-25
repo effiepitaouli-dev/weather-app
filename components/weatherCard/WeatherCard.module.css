@@ -1,0 +1,12 @@
+.weatherCard{
+    background: rgba(var(--white), .5);
+}
+
+.weatherCard__temperature {
+    font-size: 2rem;
+    color: var(--accentColor);
+}
+
+.weatherCard__description {
+    color: var(--darkBlue);
+}

@@ -1,7 +1,3 @@
-* {
-    color: var(--textColor);
-}
-
 /* Dark theme */
 
 :root:has(.theme-dark) {
@@ -15,7 +11,7 @@
     background-color: var(--bgColor);
 }
 
-.theme-dark #__next {
+.theme-dark .outerWrapper {
     background-color: var(--bgColor);
 }
 

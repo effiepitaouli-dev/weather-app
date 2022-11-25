@@ -1,9 +1,9 @@
-input {
+input, select {
     background: var(--white);
     border-radius: var(--default-radius);
     border: none;
     padding: var(--gap);
-    box-shadow: inset 0px 0px 10px rgba(255,255,255, .6);
+    box-shadow: inset 0px -2px 5px 1px rgb(0 0 0 / 30%);
 }
 
 input, button {
@@ -17,4 +17,18 @@ button {
     background-color: var(--accentColor);
     border-radius: var(--default-radius);
     cursor: pointer;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+label {
+    margin-bottom: var(--gap)
+}
+
+label, input, select {
+    color: inherit
 }
