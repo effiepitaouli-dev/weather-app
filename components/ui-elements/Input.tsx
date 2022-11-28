@@ -27,7 +27,7 @@ export function Input(props: InputProps) {
         ...otherProps
     } = props;
 
-    const classNames = clsx(styles.Input, 'u-flex', 'u-flex-column', props.classes);
+    const classNames = clsx(styles.Input, props.classes);
 
     return (
         <fieldset className={classNames}>

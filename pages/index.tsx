@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+//import Image from 'next/image'
+//import styles from '../styles/Home.module.css'
 import { Results } from '../components/results';
 import { Location } from '../components/location';
 import { Settings } from '../components/settings';
@@ -10,7 +10,7 @@ import Cookies from 'universal-cookie';
 
 export default function Home() {
   const cookies = new Cookies();
-  const [coords, setCoords] = useState(['', '']);
+  const [coords, setCoords] = useState([]);
   const [theme, setTheme] = useState('light');
   const [hasLocation, setHasLocation] = useState(false);
 
@@ -22,20 +22,25 @@ export default function Home() {
 
   useEffect(() => {
     userPreferences();
-    cookies.get('coordinates') && setCoords(cookies.get('coordinates').split(','));
+    const coords = cookies.get('coordinates');
+    const location = cookies.get('location');
+    coords && location && setCoords([...coords.split(','), location]);
   }, []);
 
   useEffect(() => {
     const bodyElement = document.getElementsByTagName('body')[0];
-    bodyElement.classList = `theme-${theme}`;
+    bodyElement.className = `theme-${theme}`;
   }, [theme]);
 
   function changeTheme() {
     setTheme(theme == 'dark' ? 'light' : 'dark');
   }
 
-  function handleLocation(coords: string, location: string) {
-    setCoords(coords.split(','));
+  function handleLocation(coordinates: string, location: string) {
+    console.log('in handle location');
+    console.log(`${coordinates} - ${location}`);
+    setCoords([...coordinates.split(','), location]);
+    console.log(coords);
     setHasLocation(true);
   }
 

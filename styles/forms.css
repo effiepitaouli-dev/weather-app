@@ -3,7 +3,7 @@ input, select {
     border-radius: var(--default-radius);
     border: none;
     padding: var(--gap);
-    box-shadow: inset 0px -2px 5px 1px rgb(0 0 0 / 30%);
+    box-shadow: inset 0px 0px 3px 0px rgb(0 0 0 / 30%);
 }
 
 input, button {
@@ -23,10 +23,26 @@ fieldset {
     border: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset:not(:last-of-type) {
+    margin-bottom: var(--gap-l);
+}
+
+fieldset:not(:last-of-type):after {
+    content: '';
+    display: block;
+    margin-top: var(--gap-l);
+    width: 80%;
+    height: 1px;
+    background-color: rgba(var(--accent), .7);
 }
 
 label {
-    margin-bottom: var(--gap)
+    margin-bottom: var(--gap-s);
+    font-weight: 500;
 }
 
 label, input, select {
