@@ -1,6 +1,7 @@
 {
   "name": "weather-app",
   "version": "0.1.0",
+  "homepage": "https://effiepitaouli-dev.github.io/weather-app",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,7 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "cypress": "cypress open",
-    "cypress:headless": "cypress run"
+    "cypress:headless": "cypress run",
+    "predeploy": "npm run build",
+   "deploy": "weather-appnpm  -d build"
   },
   "dependencies": {
     "@types/node": "18.11.9",
@@ -25,7 +28,8 @@
   },
   "devDependencies": {
     "clsx": "^1.2.1",
-    "cypress": "^11.2.0"
+    "cypress": "^11.2.0",
+    "gh-pages": "^4.0.0"
   },
   "prettier": {
     "semi": true,
