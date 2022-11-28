@@ -1,7 +1,6 @@
 import React from "react";
 import AutoComplete from "react-google-autocomplete";
 import styles from './Autocomplete.module.css';
-//import clsx from "clsx";
 
 interface HandlePlaceChange {
     (coords: string, place: string): void;
@@ -44,10 +43,16 @@ export function Autocomplete(props: AutocompleteProps) {
         }
     }
 
+    function handleKey(e: any) {
+        // To avoid form submit on enter
+        if (e.key == 'Enter') e.preventDefault();
+    }
+
     return (
         <AutoComplete
             apiKey="AIzaSyBA10k4Go8Xy1OUV2fHVkmEIBwmCQ5FyYs"
             onPlaceSelected={getPlace}
+            onKeyPress={handleKey}
             language="en"
             options={options}>{/* To use defaultValue with the stored value from the cookie */}</AutoComplete>
     )

@@ -3,14 +3,8 @@ import clsx from "clsx";
 import styles from './Filters.module.css';
 import { Input, Select } from "../ui-elements";
 
-enum Position {
-    up = 'up',
-    down = 'down',
-    left = 'left',
-    right = 'right'
-}
 interface FiltersProps {
-    position: Position
+    position: 'up' | 'left' | 'down' | 'right';
 }
 
 export function Filters(props: FiltersProps) {

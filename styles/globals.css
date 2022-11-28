@@ -42,13 +42,14 @@ a, button {
 }
 
 .wrapper {
-  max-width: 1240px;
+  width: min(1240px, calc(100% - (2* var(--gap-l))));
   margin: calc(2 * var(--gap-l)) var(--gap-l);
   padding: var(--gap-l);
   overflow: hidden;
   height: 100%;
   color: var(--textColor);
-  background-color: rgba(var(--bg), .3);
+  /* background-color: rgba(var(--bg), .3); */
+  background-color: var(--blue4);
   box-shadow: 6px 1px 25px rgb(96 205 216 / 35%), 
   -6px -1px 25px rgb(96 205 216 / 35%), 
   inset 10px 10px 8px rgb(255 255 255 / 25%), 

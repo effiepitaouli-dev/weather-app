@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import clsx from 'clsx';
 import styles from './Results.module.css';
-import { WeatherCard } from '../weatherCard';
+import { WeatherCard, weatherObj } from '../weatherCard';
 //import ReactDOM from 'react-dom';
 
 // TO DO 
@@ -19,107 +19,107 @@ const weatherCodes = [
 ];
 export interface ResultsProps {
     classes?: string;
-    coordinates: string[];
-    hasLocation: boolean;
+    coordinates?: any[] | null;
 }
 
 export function Results(props: ResultsProps) {
     let {
         classes: classes,
         coordinates: coordinates,
-        hasLocation: hasLocation,
         ...otherProps
     } = props;
 
-    const [lat, lng, location] = props.coordinates;
     const [data, setData] = useState(null);
     const [isLoading, setLoading] = useState(true);
-    const [timezone, setTimezone] = useState(null);
-    const [time, setTime] = useState(null);
     const [days] = useState([]);
 
-    //const WeatherCard = React.lazy(() => import('../weatherCard'));
-
-    const classNames = clsx(
-        'results__wrapper',
+    const classNamesWrapper = clsx(
+        styles['results__wrapper'],
+        'results__wrapper', // Used for cypress
+        'grid',
         isLoading && 'isLoading',
         props.classes,
     );
 
+    const classNames = clsx(styles.results, 'results', 'grid');
+
     useEffect(() => {
-        if (props.hasLocation) {
+        const [lat, lng, location] = props.coordinates;
+
+        function clearDays() {
+            while (days.length) {
+                days.pop();
+            }
+        }
+
+        if (lat && lng) {
             setLoading(true);
-            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=apparent_temperature_max,sunrise,sunset&current_weather=true&past_days=1&timezone=auto`)
-                .then(res => res.json())
-                .then(res => {
-                    console.log(res);
-                    setData({ ...res.current_weather, timezone: res.timezone, location: location });
-                    handleData();
+            (async () => {
+                await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=apparent_temperature_max,sunrise,sunset&current_weather=true&past_days=1&timezone=auto`)
+                    .then(res => res.json())
+                    .then(res => {
+                        if (!res.error) {
+                            console.log(res);
+                            const [currentDate, currentTime] = res.current_weather.time.split('T');
+                            let currentIndex = -1;
 
-                    const length = res.daily.time.length;
-                    const dates = res.daily;
-                    clearDays();
+                            const length = res.daily.time.length;
+                            const dates = res.daily;
+                            clearDays();
 
-                    for (let i = 0; i < length; i++) {
-                        const obj = {};
-                        obj.max_temperature = dates.apparent_temperature_max[i];
-                        obj.sunset = dates.sunset[i];
-                        obj.sunrise = dates.sunrise[i];
-                        obj.date = dates.time[i];
-                        days.push(obj);
-                    }
-                    setLoading(false);
-                });
+                            for (let i = 0; i < length; i++) {
+                                const obj: weatherObj = {};
+                                const [date, time] = dates.time[i].split('T');
+                                obj.max_temperature = dates.apparent_temperature_max[i];
+                                obj.sunset = dates.sunset[i].split('T')[1];
+                                obj.sunrise = dates.sunrise[i].split('T')[1];
+                                obj.date = date;
+                                obj.future = date > currentDate;
+
+                                // Update current 
+
+                                if (currentDate == date) {
+                                    currentIndex = i;
+                                } else {
+                                    days.push(obj);
+                                }
+                            }
+
+                            setData({ ...res.current_weather, ...days[currentIndex], time: currentTime, /*date: currentDate, */ timezone: res.timezone, location: location });
+
+                        } else {
+                            console.log(res.error);
+                        }
+                    });
+                setLoading(false);
+            })();
+
         }
+    }, [props.coordinates[0], props.coordinates[1]]);
 
-    }, coordinates);
-
-    function clearDays() {
-        while (days.length) {
-            days.pop();
-        }
-    }
-
-    function renderContent() {
-        if (props.hasLocation) {
-            return isLoading ? 'Loading...' : formattedData
-        } else {
-            return 'Waiting for location input or use of geolocation';
-        }
-    }
-
-    function handleData() {
-        // To render primary Card
-        if (data) {
-            console.log(data);
-            setTimezone(data.timezone);
-            setTime(data.time.split('T')[1]);
-        }
-    }
+    // function renderContent() {
+    //     if (props.hasLocation) {
+    //         return isLoading ? 'Loading...' : formattedData
+    //     } else {
+    //         return 'Waiting for location input or use of geolocation';
+    //     }
+    // }
 
     function findWeatherCode(code: number) {
-
-        const obj = weatherCodes.filter(i => { i.code == code });
-        console.log(obj);
-        return obj.description;
+        const obj = weatherCodes.find(i => i.code == code);
+        return obj && obj['description'];
     }
 
     return (
-        <div className={classNames}>
-            {/* {!props.hasLocation && 'Waiting for location input or use of geolocation'} */}
-            <div className="grid">
-                {/* <div aria-label='Timezone'>Timezone: {timezone}</div>
-                <div aria-label={`Current time`}>Current time: {time}</div> */}
+        <div className={classNamesWrapper}>
+            {
+                data && <WeatherCard key={data.time} temperature={data.temperature} description={findWeatherCode(data.weathercode)} type="current" weatherObj={data}></WeatherCard>
+            }
 
-                {
-                    data && <WeatherCard temperature={data.temperature} description={findWeatherCode(data.weathercode)} type="current" weatherObj={data}></WeatherCard>
-                }
-
-                <div className={styles.result} id="results">
-                    {days.map(day => (
-                        <WeatherCard temperature={day.max_temperature} weatherObj={day}></WeatherCard>
-                    ))}
-                </div>
+            <div className={classNames} id="results">
+                {days.map(day => (
+                    <WeatherCard key={day.date} temperature={day.max_temperature} weatherObj={day} type="default"></WeatherCard>
+                ))}
             </div>
         </div >
     );

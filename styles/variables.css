@@ -1,15 +1,27 @@
 :root{
     /* Colors to be moved to theme ? */
+    --white: rgb(255, 255, 255);
+    --negative: rgb(10, 10, 73);
+    --textColor: rgb(10, 10, 73);
     --accentColor: rgb(19, 219, 237);
     --accent: 19, 219, 237;
     --bgColor: rgb(27, 233, 199);
     --bg: 27, 233, 199;
-    --textColor: rgb(10, 10, 73);
+    
     --darkBlue: rgba(33, 33, 70);
     --darkBlueRGB: 33, 33, 70;
     --moodColor: rgb(45, 2, 2);
-    --white: rgb(255, 255, 255);
-    --negative: rgb(10, 10, 73);
+    --day: orange;
+    --night: purple;
+
+    --blue1: #1D71F2;
+    --blue2: #1C9CF6;
+    --blue3: #19C3FB;
+    --blue4: #E3F4FE;
+    --light: #FFFAE0;
+    --light75: #FFFAE075;
+    --main: #FFCD00;
+   
 
     /* Spacing */
     --gap-s: 8px;

@@ -6,25 +6,18 @@ import { Location } from '../components/location';
 import { Settings } from '../components/settings';
 import { Filters } from '../components/filters';
 import { useState, useEffect } from 'react';
-import Cookies from 'universal-cookie';
 
 export default function Home() {
-  const cookies = new Cookies();
   const [coords, setCoords] = useState([]);
   const [theme, setTheme] = useState('light');
-  const [hasLocation, setHasLocation] = useState(false);
 
   function userPreferences() {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setTheme('dark');
     };
   }
-
   useEffect(() => {
     userPreferences();
-    const coords = cookies.get('coordinates');
-    const location = cookies.get('location');
-    coords && location && setCoords([...coords.split(','), location]);
   }, []);
 
   useEffect(() => {
@@ -37,11 +30,7 @@ export default function Home() {
   }
 
   function handleLocation(coordinates: string, location: string) {
-    console.log('in handle location');
-    console.log(`${coordinates} - ${location}`);
     setCoords([...coordinates.split(','), location]);
-    console.log(coords);
-    setHasLocation(true);
   }
 
   return (
@@ -56,11 +45,11 @@ export default function Home() {
         </Head>
         <Settings theme={changeTheme} dark={theme}></Settings>
         <Location handlePlace={handleLocation}></Location>
-        <Results coordinates={coords} hasLocation={hasLocation}></Results>
+        <Results coordinates={coords}></Results>
 
       </div>
       <Filters position="left"></Filters>
-    </div>
+    </div >
 
   )
 }

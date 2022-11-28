@@ -2,6 +2,14 @@
     background: rgba(var(--white), .5);
 }
 
+.weatherCard--day {
+    background: var(--day);
+}
+
+.weatherCard--night {
+    background: var(--night);
+}
+
 .weatherCard__temperature {
     font-size: 2rem;
     color: var(--accentColor);
@@ -9,4 +17,12 @@
 
 .weatherCard__description {
     color: var(--darkBlue);
+}
+
+.weatherCard--default {
+    background: var(--light);
+}
+
+.weatherCard--default:not(.weatherCard--future) {
+    background: var(--light75);
 }

@@ -10,12 +10,14 @@ input, button {
     font-size: 1rem;
     font-weight: 700;
     height: 48px;
+    margin: 0;
 }
 
 button {
     border: none;
-    background-color: var(--accentColor);
-    border-radius: var(--default-radius);
+    /* background-color: var(--accentColor); */
+    background-color: var(--main);
+    border-radius: calc(var(--default-radius) * 2);
     cursor: pointer;
 }
 

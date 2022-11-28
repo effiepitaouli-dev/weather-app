@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Autocomplete } from "../autocomplete";
 import Cookies from 'universal-cookie';
@@ -17,7 +17,6 @@ export function Location(props: LocationProps) {
     } = props;
 
     const classNames = clsx(styles.location, 'grid', props.classes);
-
     const cookies = new Cookies();
 
     useEffect(() => {
@@ -31,8 +30,8 @@ export function Location(props: LocationProps) {
 
         const location = cookies.get('location');
         const coords = cookies.get('coordinates');
-
         if (location && coords) props.handlePlace(coords, location);
+
     }, []);
 
     function useGeolocation(e: any) {
@@ -64,6 +63,7 @@ export function Location(props: LocationProps) {
     return (
         <form className={classNames}>
             <Autocomplete handlePlaceChange={handlePlaceChange}></Autocomplete>
+            <div>or</div>
             <button id="geolocation-button" onClick={useGeolocation}>Use my current location</button>
         </form>
     );

@@ -1,0 +1,8 @@
+.results {
+    gap: var(--gap-l);
+}
+
+.results__wrapper {
+    gap: var(--gap-l);
+    grid-template-columns: auto auto;
+}

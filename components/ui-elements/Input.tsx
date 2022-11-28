@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { HTMLInputTypeAttribute } from "react";
 import styles from './UiElements.module.css';
 
 enum InputType {
@@ -12,7 +13,7 @@ enum InputType {
 export interface InputProps {
     label?: string;
     name: string;
-    type: InputType;
+    type: HTMLInputTypeAttribute;
     placeholder?: string;
     classes?: string;
 }

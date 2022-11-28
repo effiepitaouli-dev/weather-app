@@ -3,6 +3,7 @@
 }
 
 input.themeCheckbox {
+    appearance: none;
     -webkit-appearance: none;
     width: 56px;
     height: 32px;
@@ -29,4 +30,10 @@ input.themeCheckbox:after {
     
 input.themeCheckbox:checked:after {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+input.themeCheckbox:checked {
+    /*box-shadow: 0px 0px 15px 0px rgb(255 255 255 / 50%);*/
+    background-color: var(--bgColor);
+    transition: background 0s 500ms;
 }
