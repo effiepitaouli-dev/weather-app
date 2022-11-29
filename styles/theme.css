@@ -1,8 +1,39 @@
-.theme-dark{
-    --bgColor: rgb(10, 10, 73);
-    --textColor: rgb(237, 255, 254);
-}
+/* Dark theme */
 
 :root:has(.theme-dark) {
-    --bgColor: rgb(10, 10, 73);
+    --bgColor: rgb(33 33 70);
+    --bg: 40, 40, 74;
+
+    --blue1: #02243C;
+    --blue2: #005DB3;
+    --blue3: #5195CE;
+    --blue4: #E6E6E6;
+    --light: #F9F9F9;
+    /* --main: #5BC236; */
 }
+
+.theme-dark{
+    --textColor: rgb(237, 255, 254);
+    --negative: var(--white);
+    background-color: var(--bgColor);
+}
+
+.theme-dark .outerWrapper {
+    background-color: var(--bgColor);
+}
+
+.theme-dark .wrapper {
+    /* background-color: rgba(var(--bg), 1); */
+    background-color: var(--blue3);
+    box-shadow: 8px 1px 20px 8px rgb(14 24 38 / 35%), -20px 2px 20px 3px rgb(14 24 38 / 35%);
+}
+
+/* For targeting Firefox */
+/* Not currently supporting :has() */
+
+@-moz-document url-prefix() { 
+    .theme-dark {
+        --bgColor: rgb(33 33 70);
+        --bg: 40, 40, 74;
+    }
+  }

@@ -1,0 +1,25 @@
+.results__wrapper {
+    row-gap: var(--gap-l);
+    grid-template-columns: 50% 50%;
+}
+
+.results {
+    gap: var(--gap-l);
+    grid-column: span 2;
+    grid-template-areas: 
+        'a a b b'
+        'c d b b'
+        'e f g h';
+}
+
+.result--current {
+    grid-area: b;
+}
+
+.result:not(.result--current):nth-child(2) {
+    grid-area: a;
+}
+
+.result:not(.result--current):nth-child(3) {
+    grid-area: c;
+}

@@ -1,11 +1,10 @@
 import React from "react";
 import clsx from 'clsx';
-import { createPublicKey } from "crypto";
-//import styles from './Button.module.css';
+import styles from './UiElements.module.css';
 
 export interface ButtonProps {
     text: string;
-    click: Function;
+    click(): void;
 }
 
 export function Button(props: ButtonProps) {
@@ -16,7 +15,7 @@ export function Button(props: ButtonProps) {
     } = props;
 
     return (
-        <button>
+        <button className={styles.button} onClick={props.click}>
             {props.text}
         </button>
     );

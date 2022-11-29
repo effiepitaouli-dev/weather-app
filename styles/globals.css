@@ -1,17 +1,22 @@
 @import './variables.css';
 @import './theme.css';
 @import './grid.css';
+@import './forms.css';
 @import './utitlities.css';
+@import './typography.css';
+@import './googleOverride.css';
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
   height: 100%;
   overflow-x: hidden;
-  background-color: var(--bgColor);
+  background-color: var(--white);
+  color: var(--textColor);
 }
 
 a {
@@ -19,20 +24,44 @@ a {
   text-decoration: none;
 }
 
+a, button {
+  transition: var(--default-transition);
+}
+
 * {
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: dashed 2px var(--negative);
+  outline-offset: 3px;
+}
+
 #__next {
-  height: 100%;
-  display: grid;
-  place-items: center;
-  background-color: var(--bgColor);
+  height: 100%;  
 }
 
 .wrapper {
-  max-width: 1240px;
+  width: min(1240px, calc(100% - (2* var(--gap-l))));
+  margin: calc(2 * var(--gap-l)) var(--gap-l);
+  padding: var(--gap-l);
   overflow: hidden;
   height: 100%;
   color: var(--textColor);
+  /* background-color: rgba(var(--bg), .3); */
+  background-color: var(--blue4);
+  box-shadow: 6px 1px 25px rgb(96 205 216 / 35%), 
+  -6px -1px 25px rgb(96 205 216 / 35%), 
+  inset 10px 10px 8px rgb(255 255 255 / 25%), 
+  inset -16px 0px 20px 10px rgb(255 255 255 / 35%);
+  border-radius: 32px;
+}
+
+.outerWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background-color: var(--white);
 }

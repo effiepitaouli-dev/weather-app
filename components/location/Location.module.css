@@ -1,0 +1,18 @@
+.location {
+    margin: var(--gap-l) 0;
+    grid-template-columns: 1fr auto auto;
+    gap: var(--gap);
+    align-items: center;
+}
+
+.location input {
+    color: var(--bgColor);
+}
+
+.location button, .location input {
+    border-radius: var(--default-radius);
+}
+
+.location button {
+    padding: 0 var(--gap-l);
+}

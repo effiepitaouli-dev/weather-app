@@ -1,0 +1,46 @@
+.filters {
+    position: absolute;
+    padding: var(--gap-l) var(--gap);
+    background: rgba(var(--darkBlueRGB), .8);
+    /* border-radius: 0 var(--default-radius) var(--default-radius) 0; */
+    color: var(--white);
+    transition: transform var(--default-transition);
+}
+
+.filters input, .filters select {
+    color: var(--darkBlue);
+}
+
+.filters--hidden {
+    transform: translateX(-100%);
+}
+
+.filters--hidden .formWrapper {
+    visibility: hidden;
+}
+
+.filters--left {
+    left: 0;
+}
+
+.filterBtn {
+    position: absolute;
+    display: flex;
+    height: 80px;
+    width: 16px;
+    border-radius: 0 var(--default-radius) var(--default-radius) 0;
+    background: inherit;
+    justify-content: center;
+    align-items: center;
+    right: -16px;
+    color: inherit;
+    cursor: pointer;
+}
+
+.filterBtn:after {
+    content: '\276F';
+}
+
+.filters--left, .filters--right {
+    height: 100%;
+}
