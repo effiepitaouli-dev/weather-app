@@ -39,7 +39,7 @@ export function Autocomplete(props: AutocompleteProps) {
     function getPlace(place: any) {
         if (place) {
             const coords = `${place.geometry.location.lat()},${place.geometry.location.lng()}`;
-            props.handlePlaceChange(coords, place.formatted_address);
+            handlePlaceChange(coords, place.formatted_address);
         }
     }
 

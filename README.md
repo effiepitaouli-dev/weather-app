@@ -48,8 +48,12 @@ Check weather api documentation and parameters for limiting results
 TO DO:
 
 1. Hover Effects
-2. Test for Accessibility
+2. Test for Accessibility, html validation, screen readers and keyboard interaction
 3. Add settings bar on the left 
 4. Fix styles for google autocomplete
-5. Use LocalStorage for adding additional configuration?
-6. Mood Animation effect for current day
+5. Use LocalStorage for storing preferences and additional configuration?
+6. Mood Animation effect for current day for weather codes over 40
+7. Adding styles for day and night
+8. Redux
+9. Excessive cypress testing
+10. Setup deployment and gh-pages

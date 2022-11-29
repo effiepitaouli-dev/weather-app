@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useState } from 'react';
 import styles from './WeatherCard.module.css';
 
 export interface weatherObj {
@@ -8,9 +9,7 @@ export interface weatherObj {
     future?: boolean;
     winddirection?: number;
     windspeed?: number;
-    timezone?: string;
     date?: string;
-    location?: string;
     max_temperature?: number;
 }
 interface WeatherCardProps {
@@ -27,13 +26,15 @@ export function WeatherCard(props: WeatherCardProps) {
         description: description,
         classes: classes,
         type: type,
+        weatherObj: weatherObj,
         ...otherProps
     } = props;
 
+    const [expanded, setExpanded] = useState(type == "current" ? true : false);
     let timeClass = undefined;
-    if (props.type == "current") {
+    if (type == "current" && weatherObj) {
         // String comparison works because the time is normalized
-        timeClass = props.weatherObj && props.weatherObj.time > props.weatherObj.sunset ? 'night' : 'day'
+        timeClass = weatherObj.time > weatherObj.sunset || weatherObj.time < weatherObj.sunrise ? 'night' : 'day'
     }
 
     // On click new request for specific date 
@@ -41,35 +42,33 @@ export function WeatherCard(props: WeatherCardProps) {
     const classNames = clsx(
         'u-flex',
         'u-flex-column',
-        props.type == "current" && styles[`weatherCard--${timeClass}`],
+        type == "current" && styles[`weatherCard--${timeClass}`],
         styles.weatherCard,
-        styles[`weatherCard--${props.type}`],
-        props.type == "default" && props.weatherObj && props.weatherObj.future && styles[`weatherCard--future`]
+        styles[`weatherCard--${type}`],
+        type == "default" && weatherObj && weatherObj.future && styles[`weatherCard--future`],
+        expanded && 'isExpanded',
+        classes
     );
 
-    return props.type && props.type == "current" ?
-        <div>
-            {props.weatherObj &&
+    function handleClick() {
+        if (!expanded) {
+            // Handle request for additional data
+            console.log('Wait for additional information for card with date: ' + weatherObj?.date);
+        }
+        setExpanded(!expanded);
+    }
+
+    return (weatherObj &&
+
+        <article className={classNames} tabIndex={type == "current" ? -1 : 0} onClick={handleClick}>
+            <div>Date: {weatherObj.date}</div>
+            <div className={styles["weatherCard__temperature"]}>{temperature}</div>
+            {type && type == "current" &&
                 <>
-                    <div>It is currently {props.weatherObj.time} on {props.weatherObj.location}</div>
-                    <div>Timezone: {props.weatherObj.timezone}</div>
-                    <div className={classNames}>
-                        <div>Date: {props.weatherObj.date}</div>
-
-
-                        <div className={styles["weatherCard__temperature"]}>{props.temperature}</div>
-                        <div className={styles["weatherCard__description"]}>{props.description}</div>
-                        <div className={styles["weatherCard__wind"]}>{props.weatherObj.winddirection} {props.weatherObj.windspeed}</div>
-                    </div>
+                    <div className={styles["weatherCard__description"]}>{description}</div>
+                    <div className={styles["weatherCard__wind"]}>{weatherObj.winddirection} {weatherObj.windspeed}</div>
                 </>
             }
-
-        </div>
-        :
-
-        props.weatherObj &&
-        <div className={classNames}>
-            <div>Date: {props.weatherObj.date}</div>
-            <div className={styles["weatherCard__temperature"]}>{props.temperature}</div>
-        </div>
+        </article>
+    )
 }

@@ -14,14 +14,13 @@ export function Filters(props: FiltersProps) {
     } = props;
 
     const [hidden, setHidden] = useState(true);
-    const classNames = clsx(styles.filters, styles[`filters--${props.position}`], styles['filters--hidden']);
+    const classNames = clsx(styles.filters, styles[`filters--${position}`], styles['filters--hidden']);
 
     function toggleForm(e: any) {
         e.preventDefault();
         const btnParent = e.target.parentNode;
         btnParent.classList.toggle(styles['filters--hidden']);
         setHidden(!hidden);
-        //btnParent.style.visibility = hidden ? 'visible' : 'hidden'
     }
 
     return (
@@ -32,6 +31,6 @@ export function Filters(props: FiltersProps) {
                 <Select name="days" label="Previous"></Select>
             </div>
             <button className={styles.filterBtn} onClick={(e: React.MouseEvent) => toggleForm(e)} aria-label="Show/hide filter form"></button>
-        </form >
+        </form>
     );
 }

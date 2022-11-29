@@ -1,5 +1,7 @@
 .weatherCard{
     background: rgba(var(--white), .5);
+    min-height: 200px;
+    cursor: pointer;
 }
 
 .weatherCard--day {

@@ -23,7 +23,7 @@ export function Settings(props: SettingsProps) {
     }
 
     return (
-        <div className={classes}>
+        <div className={classes} role="toolbar">
             <input
                 id="dark-theme"
                 className={styles.themeCheckbox}

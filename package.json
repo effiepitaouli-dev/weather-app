@@ -30,11 +30,5 @@
     "clsx": "^1.2.1",
     "cypress": "^11.2.0",
     "gh-pages": "^4.0.0"
-  },
-  "prettier": {
-    "semi": true,
-    "singleQuote": false,
-    "trailingComma": "none",
-    "tabWidth": 4
   }
 }

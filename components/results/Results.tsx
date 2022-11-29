@@ -38,13 +38,15 @@ export function Results(props: ResultsProps) {
         'results__wrapper', // Used for cypress
         'grid',
         isLoading && 'isLoading',
-        props.classes,
+        !coordinates && 'error',
+        classes,
     );
 
     const classNames = clsx(styles.results, 'results', 'grid');
 
-    useEffect(() => {
-        const [lat, lng, location] = props.coordinates;
+    if (coordinates) useEffect(() => {
+        const [lat, lng, location] = coordinates;
+        console.log('In use effect in Results');
 
         function clearDays() {
             while (days.length) {
@@ -85,7 +87,7 @@ export function Results(props: ResultsProps) {
                                 }
                             }
 
-                            setData({ ...res.current_weather, ...days[currentIndex], time: currentTime, /*date: currentDate, */ timezone: res.timezone, location: location });
+                            setData({ ...res.current_weather, ...days[currentIndex], time: currentTime, /*date: currentDate, */ location: location });
 
                         } else {
                             console.log(res.error);
@@ -95,15 +97,7 @@ export function Results(props: ResultsProps) {
             })();
 
         }
-    }, [props.coordinates[0], props.coordinates[1]]);
-
-    // function renderContent() {
-    //     if (props.hasLocation) {
-    //         return isLoading ? 'Loading...' : formattedData
-    //     } else {
-    //         return 'Waiting for location input or use of geolocation';
-    //     }
-    // }
+    }, [coordinates[0], coordinates[1], days]);
 
     function findWeatherCode(code: number) {
         const obj = weatherCodes.find(i => i.code == code);
@@ -111,16 +105,20 @@ export function Results(props: ResultsProps) {
     }
 
     return (
-        <div className={classNamesWrapper}>
+        <section className={classNamesWrapper}>
             {
-                data && <WeatherCard key={data.time} temperature={data.temperature} description={findWeatherCode(data.weathercode)} type="current" weatherObj={data}></WeatherCard>
+                data && days.length && <>
+                    {data.location && data.time &&
+                        <div>It is currently {data.time} on {data.location}</div>}
+                    <div>Timezone: {data.timezone}</div>
+                    <div className={classNames} id="results">
+                        <WeatherCard key={data.time} classes={`${styles.result} ${styles['result--current']}`} temperature={data.temperature} description={findWeatherCode(data.weathercode)} type="current" weatherObj={data}></WeatherCard>
+                        {days.map(day => (
+                            <WeatherCard key={day.date} classes={styles.result} temperature={day.max_temperature} weatherObj={day} type="default"></WeatherCard>
+                        ))}
+                    </div>
+                </>
             }
-
-            <div className={classNames} id="results">
-                {days.map(day => (
-                    <WeatherCard key={day.date} temperature={day.max_temperature} weatherObj={day} type="default"></WeatherCard>
-                ))}
-            </div>
-        </div >
+        </section>
     );
 }

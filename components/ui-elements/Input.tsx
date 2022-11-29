@@ -28,12 +28,12 @@ export function Input(props: InputProps) {
         ...otherProps
     } = props;
 
-    const classNames = clsx(styles.Input, props.classes);
+    const classNames = clsx(styles.Input, classes);
 
     return (
         <fieldset className={classNames}>
-            {props.label && <label>{props.label}</label>}
-            <input type={props.type} name={props.name}></input>
+            {label && <label>{props.label}</label>}
+            <input type={type} name={name}></input>
         </fieldset>
     )
 }

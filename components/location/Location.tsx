@@ -16,11 +16,13 @@ export function Location(props: LocationProps) {
         ...otherProps
     } = props;
 
-    const classNames = clsx(styles.location, 'grid', props.classes);
+    const classNames = clsx(styles.location, 'grid', classes);
     const cookies = new Cookies();
 
     useEffect(() => {
+        console.log('in useEffect on Location');
         const button = document.getElementById("geolocation-button");
+
         // If browser not supports geolocation, hide the relative button
         // Check navigator permissions
         if (!navigator.geolocation && button) {
@@ -30,7 +32,7 @@ export function Location(props: LocationProps) {
 
         const location = cookies.get('location');
         const coords = cookies.get('coordinates');
-        if (location && coords) props.handlePlace(coords, location);
+        if (location && coords) handlePlace(coords, location);
 
     }, []);
 
@@ -57,7 +59,7 @@ export function Location(props: LocationProps) {
     }
 
     function handlePlaceChange(coords: string, location: string) {
-        props.handlePlace(coords, location);
+        handlePlace(coords, location);
     }
 
     return (
