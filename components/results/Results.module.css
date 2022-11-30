@@ -1,6 +1,6 @@
 .results__wrapper {
     row-gap: var(--gap-l);
-    grid-template-columns: 50% 50%;
+    grid-template-columns: repeat(2, 50%);
 }
 
 .results {
@@ -10,6 +10,7 @@
         'a a b b'
         'c d b b'
         'e f g h';
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .result--current {

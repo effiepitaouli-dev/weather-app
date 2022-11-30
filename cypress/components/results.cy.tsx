@@ -18,7 +18,7 @@ describe('Test results, fetch and render', () => {
         results.should('exist');
         results.should('have.descendants', 'article');
         cy.get('.results__wrapper > div').should(($child) => {
-            expect($child, '3 items').to.have.length(3);
+            expect($child, '3 items').to.have.length(2);
             expect($child.eq(0)).to.contain('It is currently');
         });
         cy.get('.results article').should(($card) => {

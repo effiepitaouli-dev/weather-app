@@ -3,16 +3,18 @@
     --white: rgb(255, 255, 255);
     --negative: rgb(10, 10, 73);
     --textColor: rgb(10, 10, 73);
-    --accentColor: rgb(19, 219, 237);
-    --accent: 19, 219, 237;
+    --accentColor: rgb(86, 18, 196);
+    --accent: 86, 18, 196;
     --bgColor: rgb(27, 233, 199);
     --bg: 27, 233, 199;
     
     --darkBlue: rgba(33, 33, 70);
     --darkBlueRGB: 33, 33, 70;
     --moodColor: rgb(45, 2, 2);
-    --day: orange;
-    --night: purple;
+    --day: rgb(255, 208, 0);
+    --dayRGB: 255,208, 0;
+    --night: rgb(58, 4, 75);
+    --nightRGB: 58, 4, 75;
 
     --blue1: #1D71F2;
     --blue2: #1C9CF6;

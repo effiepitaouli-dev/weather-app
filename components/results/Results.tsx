@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import styles from './Results.module.css';
 import { WeatherCard, weatherObj } from '../weatherCard';
@@ -8,14 +8,34 @@ import { WeatherCard, weatherObj } from '../weatherCard';
 // Transfer the mapping in separate file ??
 
 const weatherCodes = [
-    { code: 0, description: "Clear sky" },
-    { code: 1, description: "Mainly clear" },
-    { code: 2, description: "Partly cloudy" },
-    { code: 3, description: "Overcast" },
-    { code: 45, description: "Fog" },
-    { code: 48, description: "Depositing rime fog" },
-    { code: 51, description: "Light drizzle" },
-    { code: 53, description: "Moderate drizzle" }
+    { code: 0, description: "Clear sky", imageUrl: '/weather-sun.svg' },
+    { code: 1, description: "Mainly clear", imageUrl: '/weather-clouds.svg' },
+    { code: 2, description: "Partly cloudy", imageUrl: '/weather-clouds-many.svg' },
+    { code: 3, description: "Overcast", imageUrl: "/weather-windy.svg" },
+    { code: 45, description: "Fog", imageUrl: null },
+    { code: 48, description: "Depositing rime fog", imageUrl: null },
+    { code: 51, description: "Light drizzle", imageUrl: '/weather-drop.svg' },
+    { code: 53, description: "Moderate drizzle", imageUrl: '/weather-drop.svg' },
+    { code: 55, description: "Dense intensity drizzle", imageUrl: '/weather-rain.svg' },
+    { code: 56, description: "Light Freezing drizzle", imageUrl: '/weather-drop.svg' },
+    { code: 57, description: "Dense Freezing drizzle", imageUrl: '/weather-rain.svg' },
+    { code: 61, description: "Slight rain", imageUrl: '/weather-drop.svg' },
+    { code: 63, description: "Moderate rain", imageUrl: '/weather-rain.svg' },
+    { code: 65, description: "Heavy rain", imageUrl: '/weather-rain.svg' },
+    { code: 66, description: "Light freezing rain", imageUrl: '/weather-rain.svg' },
+    { code: 67, description: "Heavy freezing rain", imageUrl: '/weather-rain.svg' },
+    { code: 71, description: "Slight snow fall", imageUrl: '/weather-snowflake.svg' },
+    { code: 73, description: "Moderate snow fall", imageUrl: '/weather-snow.svg' },
+    { code: 75, description: "Heavy snow fall", imageUrl: '/weather-snow.svg' },
+    { code: 77, description: "Snow grains", imageUrl: '/weather-snow.svg' },
+    { code: 80, description: "Slight rain showers", imageUrl: '/weather-rain.svg' },
+    { code: 81, description: "Moderate rain showers", imageUrl: '/weather-rain.svg' },
+    { code: 82, description: "Heavy rain showers", imageUrl: '/weather-rain.svg' },
+    { code: 85, description: "Slight snow showers", imageUrl: '/weather-snow.svg' },
+    { code: 86, description: "Heavy snow showers", imageUrl: '/weather-snow.svg' },
+    { code: 95, description: "Slight or moderate thunderstom", imageUrl: '/weather-storm.svg' },
+    { code: 96, description: "Slight hail thunderstorm", imageUrl: '/weather-storm.svg' },
+    { code: 99, description: "Heavy hail thunderstorm", imageUrl: '/weather-storm.svg' }
 ];
 export interface ResultsProps {
     classes?: string;
@@ -70,24 +90,24 @@ export function Results(props: ResultsProps) {
                             clearDays();
 
                             for (let i = 0; i < length; i++) {
-                                const obj: weatherObj = {};
+                                const obj: weatherObj = { index: i };
                                 const [date, time] = dates.time[i].split('T');
                                 obj.max_temperature = dates.apparent_temperature_max[i];
                                 obj.sunset = dates.sunset[i].split('T')[1];
                                 obj.sunrise = dates.sunrise[i].split('T')[1];
                                 obj.date = date;
                                 obj.future = date > currentDate;
+                                days.push(obj);
 
                                 // Update current 
 
                                 if (currentDate == date) {
                                     currentIndex = i;
-                                } else {
-                                    days.push(obj);
                                 }
                             }
+                            const weather = findWeather(res.current_weather.weathercode);
 
-                            setData({ ...res.current_weather, ...days[currentIndex], time: currentTime, /*date: currentDate, */ location: location });
+                            setData({ ...res.current_weather, ...days[currentIndex], index: currentIndex, time: currentTime, timezone: res.timezone_abbreviation, location: location, description: weather.description, imageurl: weather['imageUrl'] });
 
                         } else {
                             console.log(res.error);
@@ -99,26 +119,32 @@ export function Results(props: ResultsProps) {
         }
     }, [coordinates[0], coordinates[1], days]);
 
-    function findWeatherCode(code: number) {
+    function findWeather(code: number) {
         const obj = weatherCodes.find(i => i.code == code);
-        return obj && obj['description'];
+        return obj;
+    }
+
+    function requestData(obj: object) {
+        //To call api for specific date and update weatherObj
+        return days[obj.index];
     }
 
     return (
-        <section className={classNamesWrapper}>
+        <section className={classNamesWrapper} {...otherProps}>
             {
                 data && days.length && <>
-                    {data.location && data.time &&
-                        <div>It is currently {data.time} on {data.location}</div>}
-                    <div>Timezone: {data.timezone}</div>
+                    {
+                        data.location && data.time &&
+                        <div className="underline mb-0">It is currently {data.time} <span>({data.timezone})</span> on {data.location}</div>
+                    }
                     <div className={classNames} id="results">
-                        <WeatherCard key={data.time} classes={`${styles.result} ${styles['result--current']}`} temperature={data.temperature} description={findWeatherCode(data.weathercode)} type="current" weatherObj={data}></WeatherCard>
+                        <WeatherCard key={data.index} classes={`${styles.result} ${styles['result--current']}`} temperature={data.temperature} description={data.description} style={{ '--bgImage': `url('${data.imageurl}')` }} type="current" weatherObj={data}></WeatherCard>
                         {days.map(day => (
-                            <WeatherCard key={day.date} classes={styles.result} temperature={day.max_temperature} weatherObj={day} type="default"></WeatherCard>
+                            day.index != data.index && <WeatherCard key={day.index} classes={styles.result} temperature={day.max_temperature} weatherObj={day} type="default" requestData={requestData}></WeatherCard>
                         ))}
                     </div>
                 </>
             }
-        </section>
+        </section >
     );
 }
