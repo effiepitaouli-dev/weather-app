@@ -2,6 +2,7 @@ import { WeatherCard, weatherObj } from "../../components/weatherCard";
 
 describe('Test type, properties, function calls', () => {
     const obj: weatherObj = {
+        index: 1,
         time: '02:10',
         sunrise: '07:00',
         sunset: '18:00',
@@ -17,7 +18,10 @@ describe('Test type, properties, function calls', () => {
             expect(card.children()).to.have.length(4);
             expect(card.first().text()).to.contain('Date');
             const classText = card.attr('class');
-            if (classText) expect(classText, 'to include current').to.contain('night');
+            if (classText) {
+                expect(classText, 'to include night').to.contain('night');
+                expect(classText, 'to include current').to.contain('current');
+            }
         })
     })
 })

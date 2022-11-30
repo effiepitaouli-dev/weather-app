@@ -1,21 +1,25 @@
 .weatherCard{
     background: rgba(var(--white), .5);
     min-height: 200px;
-    cursor: pointer;
-}
-
-.weatherCard--day {
-    background: var(--day);
-}
-
-.weatherCard--night {
-    background: var(--night);
+    padding: var(--gap-l) var(--gap);
+    border-radius: var(--default-radius);
+    grid-template-columns: 1fr 120px;
+    position: relative;
+    overflow: hidden;
 }
 
 .weatherCard__temperature {
     font-size: 2rem;
-    color: var(--accentColor);
+    color: var(--blue1);
 }
+
+.weatherCard--night .weatherCard__temperature {
+    color: var(--light);
+}
+
+/* :global .theme-dark :local .weatherCard__temperature {
+    color: var(--light);
+} */
 
 .weatherCard__description {
     color: var(--darkBlue);
@@ -25,6 +29,96 @@
     background: var(--light);
 }
 
+.weatherCard--default[tabindex="0"] {
+    cursor: pointer;
+}
+
 .weatherCard--default:not(.weatherCard--future) {
     background: var(--light75);
+}
+
+.weatherCard--current {
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(var(--bg),1) 0%, rgba(var(--bg),1) 25%, rgba(var(--bg),.5) 75%, rgba(var(--bg), .3) 100%);
+}
+
+@keyframes :local(hourAnim) {
+    0% {
+        transform: scale(0.85) translate3d(10px, 70px,0);
+    }
+
+    60% {
+        transform: scale(0.85) translate3d(-45px, 40px,0);
+    }
+
+    100% {
+        transform: scale(1) translate3d(-25px, -10px,0);
+    }
+}
+
+.weatherCard--current:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: -30px;
+    right: -30px;
+    width: 220px;
+    height: 220px;
+    opacity: .8;
+    animation: hourAnim 7500ms ease infinite alternate both;
+}
+
+.weatherCard--day {
+    --bg: var(--dayRGB);
+}
+
+.weatherCard--day:after {
+    background: url(../../assets/weather-sun.svg) center center no-repeat;
+}
+
+.weatherCard--night {
+    --bg: var(--nightRGB);
+}
+
+.weatherCard--night:after {
+    background: url(../../assets/weather-moon-3.svg) center center no-repeat;
+}
+
+.weatherCard__date {
+    font-size: 1.5rem;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    color: var(--blue1);
+}
+
+.weatherCard--night .weatherCard__date {
+    color: var(--light);
+}
+
+.weatherCard__temperature {
+    grid-row-start: 2;
+    align-items: flex-end;
+}
+
+/* .weatherCard__temperature:after {
+    content: '\2103';
+    font-size: smaller;
+} */
+
+.weatherCard--current .weatherCard__temperature {
+    font-size: 3rem;
+}
+
+.weatherCard__description:after{
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: var(--bgImage);
+}
+
+.weatherCard__wind {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    justify-content: flex-end;
 }
