@@ -135,7 +135,7 @@ export function Results(props: ResultsProps) {
                 data && days.length && <>
                     {
                         data.location && data.time &&
-                        <div>It is currently {data.time} <span>({data.timezone})</span> on {data.location}</div>
+                        <div className="underline mb-0">It is currently {data.time} <span>({data.timezone})</span> on {data.location}</div>
                     }
                     <div className={classNames} id="results">
                         <WeatherCard key={data.index} classes={`${styles.result} ${styles['result--current']}`} temperature={data.temperature} description={data.description} style={{ '--bgImage': `url('${data.imageurl}')` }} type="current" weatherObj={data}></WeatherCard>

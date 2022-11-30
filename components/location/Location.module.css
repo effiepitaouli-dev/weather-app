@@ -6,7 +6,7 @@
 }
 
 .location input {
-    color: var(--bgColor);
+    color: var(--accentColor);
 }
 
 .location button, .location input {

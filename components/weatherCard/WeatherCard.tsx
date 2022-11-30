@@ -78,15 +78,15 @@ export function WeatherCard(props: WeatherCardProps) {
 
     return (
         <article className={classNames} {...otherProps}>
-            <div className={styles["weatherCard__date"]}>{month} {day}</div>
+            <div className={styles["weatherCard__date"]}><span className="u-flex">{month} {day}</span></div>
             <div className={`${styles["weatherCard__temperature"]} u-flex`} aria-label="Current temperature" role="log">{temperature}</div>
             {type && type == "current" &&
                 <>
-                    <div className={styles["weatherCard__description"]}>{description}</div>
+                    <div className={styles["weatherCard__description"]}><span>{description}</span></div>
                     <div className={`${styles["weatherCard__wind"]} u-flex u-flex-column`} aria-label="Wind information" data-title="Wind:">
-                        <span className="underline">About the wind</span>
-                        <span>Direction: {weatherObj.winddirection}</span>
-                        <span>Speed: {weatherObj.windspeed}</span>
+                        <span className="underline u-block">About the wind</span>
+                        <span className="u-block">Direction: {weatherObj.winddirection}</span>
+                        <span className="u-block">Speed: {weatherObj.windspeed}</span>
                     </div>
                 </>
             }
