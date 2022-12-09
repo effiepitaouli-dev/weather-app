@@ -18,7 +18,7 @@ export function Settings(props: SettingsProps) {
 
     const keypressHandler: KeyboardEventHandler = function (e: KeyboardEvent) {
         if (e.key == "Enter") {
-            props.theme();
+            theme();
         }
     }
 

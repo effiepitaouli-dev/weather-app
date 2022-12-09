@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { useFetch } from '../../hooks';
 import styles from './WeatherCard.module.css';
 
 export interface weatherObj {
@@ -20,7 +21,6 @@ interface WeatherCardProps {
     classes?: string;
     type: 'current' | 'default';
     weatherObj: weatherObj;
-    requestData?(e: weatherObj): void;
     style?: {};
 };
 
@@ -31,15 +31,14 @@ export function WeatherCard(props: WeatherCardProps) {
         classes: classes,
         type: type,
         weatherObj: weatherObj,
-        requestData: requestData,
         style: style,
         ...otherProps
     } = props;
 
-    const [expanded, setExpanded] = useState(type == "current" ? true : false);
+    const [expanded, setExpanded] = useState(type == "current");
     let timeClass = undefined;
 
-    if (requestData) otherProps = { ...otherProps, tabIndex: type == "current" ? -1 : 0, onClick: handleClick };
+    otherProps = { ...otherProps, tabIndex: type == "current" ? -1 : 0, onClick: handleClick };
 
     if (style) otherProps = { ...otherProps, style: style };
 
@@ -47,8 +46,6 @@ export function WeatherCard(props: WeatherCardProps) {
         // String comparison works because the time is normalized
         timeClass = weatherObj.time > weatherObj.sunset || weatherObj.time < weatherObj.sunrise ? 'night' : 'day'
     }
-
-    // On click new request for specific date 
 
     const classNames = clsx(
         'grid',
@@ -61,14 +58,14 @@ export function WeatherCard(props: WeatherCardProps) {
         classes
     );
 
+    const fetch = useFetch(`&start_date=${weatherObj.date}&end_date=${weatherObj.date}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,windspeed_10m_max,winddirection_10m_dominant&timezone=auto`);
+    //apparent_temperature_max,sunrise,sunset
+    // On click new request for specific date 
     function handleClick() {
-        if (!expanded) {
-            // Handle request for additional data
-            // Description, wind info, image and animation
-            console.log('Wait for additional information for card with date: ' + weatherObj?.date);
-        }
         setExpanded(!expanded);
-        requestData && requestData(weatherObj);
+        fetch().then(data => {
+            console.log(data);
+        });
     }
 
     // Compute date

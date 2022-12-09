@@ -1,8 +1,48 @@
 import Head from 'next/head'
+import { useEffect } from 'react';
 import { Button, Input, Select } from '../../components/ui-elements';
 
 export default function DesignSystem() {
     const title = 'Weather App | Design System';
+
+    useEffect(() => {
+        const cssVariables = Array.from(document.styleSheets)
+            .filter(
+                sheet =>
+                    sheet.href === null || sheet.href.startsWith(window.location.origin)
+            )
+            .reduce(
+                (acc, sheet) =>
+                (acc = [
+                    ...acc,
+                    ...Array.from(sheet.cssRules).reduce(
+                        (def, rule) =>
+                        (def =
+                            rule.selectorText === ":root"
+                                ? [
+                                    ...def,
+                                    ...Array.from(rule.style).filter(name =>
+                                        name.startsWith("--")
+                                    )
+                                ]
+                                : def),
+                        []
+                    )
+                ]),
+                []
+            );
+        console.log(cssVariables);
+        // Change naming convention of css color variable names so that they can be filtered above
+        // store css color variables in as object {name, value}
+        // Iterate in return statement with name and color value
+    }, []);
+
+    // function loadCss() {
+    //     console.log('in loadCss');
+    //     require('../../styles/utils/variables.css').then(
+
+    //     )
+    // }
 
     return (
         <div className="outerWrapper">
