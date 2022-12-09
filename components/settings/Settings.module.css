@@ -7,7 +7,7 @@ input.themeCheckbox {
     -webkit-appearance: none;
     width: 56px;
     height: 32px;
-    border-radius: 24px;
+    border-radius: 16px;
     background: url(../../assets/sun.svg) center center no-repeat var(--white);
     background-size: 16px auto;
     box-shadow: 4px 4px 10px 0px rgba(var(--bg), .5);

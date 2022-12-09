@@ -1,16 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import AutoComplete from "react-google-autocomplete";
-import styles from './Autocomplete.module.css';
-
-interface HandlePlaceChange {
-    (coords: string, place: string): void;
-}
-
+//import styles from './Autocomplete.module.css';
+import { CoordsContext } from '../../pages/index';
 export interface AutocompleteProps {
     placeholder?: string;
-    handlePlaceChange: HandlePlaceChange;
 }
-
 export interface Location {
     location: {
         lat(): void,
@@ -28,9 +22,9 @@ export interface Place {
 export function Autocomplete(props: AutocompleteProps) {
     let {
         placeholder: placeholder,
-        handlePlaceChange: handlePlaceChange,
         ...otherProps
     } = props;
+    const setCoords = useContext(CoordsContext).setCoords;
 
     const options = {
         fields: ['formatted_address', 'geometry', 'name']
@@ -38,8 +32,7 @@ export function Autocomplete(props: AutocompleteProps) {
 
     function getPlace(place: any) {
         if (place) {
-            const coords = `${place.geometry.location.lat()},${place.geometry.location.lng()}`;
-            handlePlaceChange(coords, place.formatted_address);
+            setCoords([place.geometry.location.lat(), place.geometry.location.lng(), place.formatted_address]);
         }
     }
 

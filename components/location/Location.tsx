@@ -1,26 +1,25 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Autocomplete } from "../autocomplete";
 import Cookies from 'universal-cookie';
 import styles from './Location.module.css';
+import { CoordsContext } from '../../pages/index';
 
 export interface LocationProps {
     classes?: string;
-    handlePlace(coors: string, place: string): void;
 }
 
 export function Location(props: LocationProps) {
     let {
         classes: classes,
-        handlePlace: handlePlace,
         ...otherProps
     } = props;
 
     const classNames = clsx(styles.location, 'grid', classes);
     const cookies = new Cookies();
+    const { coords, setCoords } = useContext(CoordsContext);
 
     useEffect(() => {
-        console.log('in useEffect on Location');
         const button = document.getElementById("geolocation-button");
 
         // If browser not supports geolocation, hide the relative button
@@ -32,8 +31,7 @@ export function Location(props: LocationProps) {
 
         const location = cookies.get('location');
         const coords = cookies.get('coordinates');
-        if (location && coords) handlePlace(coords, location);
-
+        setCoords([...coords.split(','), location]);
     }, []);
 
     function useGeolocation(e: any) {
@@ -50,7 +48,7 @@ export function Location(props: LocationProps) {
                 .then((response) => {
                     const loc = response.results[0].formatted_address;
                     cookies.set('location', loc);
-                    handlePlaceChange(str, loc);
+                    setCoords([...str.split(','), loc])
                 })
                 .catch((error) => {
                     alert(error);
@@ -58,13 +56,9 @@ export function Location(props: LocationProps) {
         });
     }
 
-    function handlePlaceChange(coords: string, location: string) {
-        handlePlace(coords, location);
-    }
-
     return (
         <form className={classNames}>
-            <Autocomplete handlePlaceChange={handlePlaceChange}></Autocomplete>
+            <Autocomplete></Autocomplete>
             <div>or</div>
             <button id="geolocation-button" onClick={useGeolocation}>Use my current location</button>
         </form>

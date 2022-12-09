@@ -5,11 +5,14 @@ import { Results } from '../components/results';
 import { Location } from '../components/location';
 import { Settings } from '../components/settings';
 import { Filters } from '../components/filters';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
+
+export const CoordsContext = createContext({});
+const ThemeContext = createContext('light');
 
 export default function Home() {
   const [coords, setCoords] = useState([]);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('light')
 
   function userPreferences() {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -29,10 +32,6 @@ export default function Home() {
     setTheme(theme == 'dark' ? 'light' : 'dark');
   }
 
-  function handleLocation(coordinates: string, location: string) {
-    setCoords([...coordinates.split(','), location]);
-  }
-
   return (
     <div className="outerWrapper">
       <div className="wrapper">
@@ -43,10 +42,13 @@ export default function Home() {
           <meta name="keywords" content="weather, google autocomplete, geolocation api" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Settings theme={changeTheme} dark={theme}></Settings>
-        <Location handlePlace={handleLocation}></Location>
-        <Results coordinates={coords}></Results>
-
+        <ThemeContext.Provider value={theme}>
+          <Settings theme={changeTheme} dark={theme}></Settings>
+        </ThemeContext.Provider>
+        <CoordsContext.Provider value={{ coords, setCoords }}>
+          <Location></Location>
+          <Results></Results>{/*coordinates={coords} */}
+        </CoordsContext.Provider>
       </div>
       <Filters position="left"></Filters>
     </div >

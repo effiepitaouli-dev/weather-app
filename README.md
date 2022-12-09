@@ -57,3 +57,9 @@ TO DO:
 8. Redux
 9. Excessive cypress testing
 10. Setup deployment and gh-pages
+11. Install lodash library?
+12. Context for Cookies?
+
+Link for icons: https://www.svgrepo.com/collection/weather-collection-2/
+
+Documentation of API: https://open-meteo.com/en/docs
