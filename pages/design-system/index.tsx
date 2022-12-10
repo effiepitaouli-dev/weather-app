@@ -79,7 +79,7 @@ export default function DesignSystem() {
                 </section>
                 <section className={styles['designSystem__section']}>
                     <h2>Typography</h2>
-
+                    {/* https://zhenyong.github.io/react/tips/dangerously-set-inner-html.html */}
                     {[...Array(6)].map((x, i) =>
                         <div key={i} className={styles['designSystem__row']} dangerouslySetInnerHTML={{ __html: `<h${i + 1}>Heading ${i + 1}</h${i + 1}>` }}>
                         </div>

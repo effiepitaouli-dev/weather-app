@@ -5,16 +5,18 @@ import { Input, Select } from "../ui-elements";
 
 interface FiltersProps {
     position: 'up' | 'left' | 'down' | 'right';
+    classes?: string;
 }
 
 export function Filters(props: FiltersProps) {
     let {
         position: position,
+        classes: classes,
         ...otherProps
     } = props;
 
     const [hidden, setHidden] = useState(true);
-    const classNames = clsx(styles.filters, styles[`filters--${position}`], styles['filters--hidden']);
+    const classNames = clsx(styles.filters, styles[`filters--${position}`], styles['filters--hidden'], classes);
 
     function toggleForm(e: any) {
         e.preventDefault();

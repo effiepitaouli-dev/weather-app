@@ -50,7 +50,7 @@ export default function Home() {
           <Results></Results>{/*coordinates={coords} */}
         </CoordsContext.Provider>
       </div>
-      <Filters position="left"></Filters>
+      <Filters classes="u-hidden" position="left"></Filters>
     </div >
 
   )

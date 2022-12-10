@@ -1,5 +1,5 @@
 import React from "react";
-import clsx from 'clsx';
+//import clsx from 'clsx';
 import styles from './UiElements.module.css';
 
 export interface ButtonProps {
@@ -17,6 +17,7 @@ export function Button(props: ButtonProps) {
     return (
         <button className={styles.button} onClick={props.click}>
             {props.text}
+            {props.children}
         </button>
     );
 }
