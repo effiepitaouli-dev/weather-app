@@ -1,33 +1,33 @@
 .weatherCard{
-    background: rgba(var(--white), .5);
+    background: rgba(var(--colorWhite), .5);
     min-height: 200px;
     padding: var(--gap-l) var(--gap);
     border-radius: var(--default-radius);
     grid-template-columns: auto;
     position: relative;
     overflow: hidden;
-    color: var(--darkBlue);
+    color: var(--colorDarkBlue);
 }
 
 .weatherCard__temperature {
     font-size: 2rem;
-    color: var(--blue1);
+    color: var(--colorBlue1);
 }
 
 .weatherCard--night .weatherCard__temperature {
-    color: var(--light);
+    color: var(--colorLight);
 }
 
 /* :global .theme-dark :local .weatherCard__temperature {
-    color: var(--light);
+    color: var(--colorLight);
 } */
 
 .weatherCard__description {
-    color: var(--darkBlue);
+    color: var(--colorDarkBlue);
 }
 
 .weatherCard--default {
-    background: var(--light);
+    background: var(--colorLight);
 }
 
 .weatherCard--default[tabindex="0"] {
@@ -35,7 +35,7 @@
 }
 
 .weatherCard--default:not(.weatherCard--future) {
-    background: var(--light75);
+    background: var(--colorLight75);
 }
 
 .weatherCard--current {
@@ -56,7 +56,7 @@
     font-size: 1.5rem;
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    color: var(--blue1);
+    color: var(--colorBlue1);
 }
 
 .weatherCard--current .weatherCard__date span {
@@ -82,7 +82,7 @@
 .weatherCard--night .weatherCard__date, 
 .weatherCard--night .weatherCard__description,
 .weatherCard--night :global(.underline) {
-    color: var(--light);
+    color: var(--colorLight);
 }
 
 .weatherCard__temperature {

@@ -1,5 +1,5 @@
 input, select {
-    background: var(--white);
+    background: var(--colorWhite);
     border-radius: var(--default-radius);
     border: none;
     padding: var(--gap);
@@ -11,14 +11,18 @@ input, button {
     font-weight: 700;
     height: 48px;
     margin: 0;
+    border-radius: var(--default-radius);
+}
+
+input[type="radio"] {
+    width: auto;
 }
 
 button {
     border: none;
-    /* background-color: var(--accentColor); */
-    background-color: var(--main);
-    border-radius: calc(var(--default-radius) * 2);
+    background-color: var(--colorMain);
     cursor: pointer;
+    padding: 0 var(--gap-l);
 }
 
 fieldset {

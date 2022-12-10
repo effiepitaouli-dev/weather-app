@@ -17,12 +17,12 @@ body {
   font-size: 16px;
   height: 100%;
   overflow-x: hidden;
-  background-color: var(--white);
-  color: var(--textColor);
+  background-color: var(--colorWhite);
+  color: var(--colorText);
 }
 
 a {
-  color: var(--textColor);
+  color: var(--colorText);
   text-decoration: none;
 }
 
@@ -35,7 +35,7 @@ a, button {
 }
 
 *:focus {
-  outline: dashed 2px var(--negative);
+  outline: dashed 2px var(--colorNegative);
   outline-offset: 3px;
 }
 
@@ -49,14 +49,19 @@ a, button {
   padding: var(--gap-l);
   overflow: hidden;
   height: 100%;
-  color: var(--textColor);
+  color: var(--colorText);
   /* background-color: rgba(var(--bg), .3); */
-  background-color: var(--blue4);
+  background-color: var(--colorBlue4);
   box-shadow: 6px 1px 25px rgb(96 205 216 / 35%), 
   -6px -1px 25px rgb(96 205 216 / 35%), 
   inset 10px 10px 8px rgb(255 255 255 / 25%), 
   inset -16px 0px 20px 10px rgb(255 255 255 / 35%);
   border-radius: 32px;
+}
+
+.wrapper--full {
+  height: auto;
+  overflow: auto;
 }
 
 .outerWrapper {
@@ -65,5 +70,9 @@ a, button {
   position: relative;
   display: grid;
   place-items: center;
-  background-color: var(--white);
+  background-color: var(--colorWhite);
+}
+
+.outerWrapper--auto {
+  height: auto;
 }

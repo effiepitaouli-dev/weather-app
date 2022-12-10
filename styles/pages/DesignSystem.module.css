@@ -1,0 +1,17 @@
+.designSystem__section:not(:first-of-type) {
+    margin-top: var(--gap-l);
+}
+
+.designSystem__row {
+    justify-content: space-between;
+    align-items: center;
+    width: max(60%, 400px);
+    margin: var(--gap) 0 0 var(--gap-l);
+}
+
+.designSystem__row :global .u-block {
+    width: 200px;
+    height: 30px;
+    box-sizing: content-box;
+    border: solid 6px white;
+}

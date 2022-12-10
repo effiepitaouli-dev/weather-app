@@ -8,7 +8,7 @@ input.themeCheckbox {
     width: 56px;
     height: 32px;
     border-radius: 16px;
-    background: url(../../assets/sun.svg) center center no-repeat var(--white);
+    background: url(../../assets/sun.svg) center center no-repeat var(--colorWhite);
     background-size: 16px auto;
     box-shadow: 4px 4px 10px 0px rgba(var(--bg), .5);
     cursor: pointer;
@@ -22,7 +22,7 @@ input.themeCheckbox:after {
     width: 100%;
     height: 100%;
     border-radius: inherit;
-    background: url(../../assets/night.svg) center center no-repeat var(--bgColor);
+    background: url(../../assets/night.svg) center center no-repeat var(--colorBg);
     background-size: 16px auto;
     clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
     transition: var(--default-transition);
@@ -34,6 +34,6 @@ input.themeCheckbox:checked:after {
 
 input.themeCheckbox:checked {
     /*box-shadow: 0px 0px 15px 0px rgb(255 255 255 / 50%);*/
-    background-color: var(--bgColor);
+    background-color: var(--colorBg);
     transition: background 0s 500ms;
 }
