@@ -1,6 +1,6 @@
 .button {
     border: none;
-    background-color: var(--accentColor);
+    background-color: var(--colorAccent);
 }
 
 .Input {

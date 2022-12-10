@@ -1,30 +1,29 @@
 /* Dark theme */
 
 :root:has(.theme-dark) {
-    --bgColor: rgb(33 33 70);
+    --colorBg: rgb(33 33 70);
     --bg: 40, 40, 74;
 
-    --blue1: #02243C;
-    --blue2: #005DB3;
-    --blue3: #5195CE;
-    --blue4: #E6E6E6;
-    --light: #F9F9F9;
-    /* --main: #5BC236; */
+    --colorBlue1: #02243C;
+    --colorBlue2: #005DB3;
+    --colorBlue3: #5195CE;
+    --colorBlue4: #E6E6E6;
+    --colorLight: #F9F9F9;
+    /* --colorMain: #5BC236; */
 }
 
 .theme-dark{
-    --textColor: rgb(237, 255, 254);
-    --negative: var(--white);
-    background-color: var(--bgColor);
+    --colorText: rgb(237, 255, 254);
+    --colorNegative: var(--colorWhite);
+    background-color: var(--colorBg);
 }
 
 .theme-dark .outerWrapper {
-    background-color: var(--bgColor);
+    background-color: var(--colorBg);
 }
 
 .theme-dark .wrapper {
-    /* background-color: rgba(var(--bg), 1); */
-    background-color: var(--blue3);
+    background-color: var(--colorBlue3);
     box-shadow: 8px 1px 20px 8px rgb(14 24 38 / 35%), -20px 2px 20px 3px rgb(14 24 38 / 35%);
 }
 
@@ -33,7 +32,7 @@
 
 @-moz-document url-prefix() { 
     .theme-dark {
-        --bgColor: rgb(33 33 70);
+        --colorBg: rgb(33 33 70);
         --bg: 40, 40, 74;
     }
   }

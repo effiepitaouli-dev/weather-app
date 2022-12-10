@@ -19,8 +19,8 @@ h5, h6 {
 .underline {
     font-weight: 500;
     padding-bottom: 2px;
-    border-bottom: solid 1px var(--accentColor);
+    border-bottom: solid 1px var(--colorAccent);
     letter-spacing: 0.4px;
     margin-bottom: var(--gap-s);
-    color: var(--blue1);
+    color: var(--colorBlue1);
 }

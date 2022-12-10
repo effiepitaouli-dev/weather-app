@@ -3,12 +3,12 @@
     padding: var(--gap-l) var(--gap);
     background: rgba(var(--darkBlueRGB), .8);
     /* border-radius: 0 var(--default-radius) var(--default-radius) 0; */
-    color: var(--white);
+    color: var(--colorWhite);
     transition: transform var(--default-transition);
 }
 
 .filters input, .filters select {
-    color: var(--darkBlue);
+    color: var(--colorDarkBlue);
 }
 
 .filters--hidden {
