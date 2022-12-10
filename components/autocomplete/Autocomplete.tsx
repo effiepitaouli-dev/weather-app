@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import AutoComplete from "react-google-autocomplete";
 //import styles from './Autocomplete.module.css';
 import { CoordsContext } from '../../pages/index';
+import { apiKey } from "../../config";
 export interface AutocompleteProps {
     placeholder?: string;
 }
@@ -43,7 +44,7 @@ export function Autocomplete(props: AutocompleteProps) {
 
     return (
         <AutoComplete
-            apiKey="AIzaSyBA10k4Go8Xy1OUV2fHVkmEIBwmCQ5FyYs"
+            apiKey={apiKey}
             onPlaceSelected={getPlace}
             onKeyPress={handleKey}
             language="en"
